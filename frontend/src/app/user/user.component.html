@@ -1,0 +1,23 @@
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="dropdown">
+                <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" id="user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select User
+                </button>
+                <div class="dropdown-menu" aria-labelledby="user" >
+                    <a class="dropdown-item" [routerLink]="['/', user.id, 'favourites']" *ngFor="let user of users">{{user.name}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pt-5">
+        <div class="col-sm-12">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+
+</div>
+

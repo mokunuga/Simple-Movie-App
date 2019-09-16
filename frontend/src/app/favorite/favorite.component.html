@@ -1,0 +1,61 @@
+<div class="jumbotron" *ngIf="user">
+    <div class="col-sm-8" >
+        <h5>Name: <small>{{ user.name }}</small></h5>
+        <h5>Email: <small>{{ user.email }}</small></h5>
+
+    </div>
+</div>
+
+<form (ngSubmit)="search()" [formGroup]="searchForm">
+    <div class="card flex-row my-3">
+        <div class="card-body">
+            <h6 class="card-title text-center">Search for Movies using Titles</h6>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Movie Title" id="title" formControlName="title" aria-describedby="button-addon2" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                    <div *ngIf="f.title.errors.required">Movie Title is required</div>
+                </div>
+            </div>
+
+            <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
+
+            <div class="text-center">
+                <button class="btn btn-sm btn-secondary" type="submit">Search</button>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+<ul class="list-group" *ngIf="result">
+    <li class="list-group-item">
+        <div class="flex-column">
+            {{ result.Title  }} <small>released {{ result.Released }}</small>
+            <p><small>{{ result.Plot }}</small></p>
+        </div>
+        <button class="btn btn-primary" (click)="add(result.imdbID)">Add to Favs</button>
+    </li>
+</ul>
+
+<div class="row pt-5">
+    <div class="col-sm-12">
+        <h4>Favourite Movies</h4>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let movie of movies">
+                <div class="row">
+                    <div class="col-sm-10 flex-column">
+                        {{ movie.Title  }} <small>released {{ movie.Released }}</small>
+                        <p><small>{{ movie.Plot }}</small></p>
+                    </div>
+
+                    <div class="col-sm-1">
+                        <button (click)=remove(movie.imdbID) class="btn btn-danger">X</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
